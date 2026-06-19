@@ -71,7 +71,16 @@
     nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); background: rgba(5,7,13,.5); }
     nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; }
     .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.18rem; letter-spacing: -.02em; }
-    .brand .mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(135deg, var(--cyan), var(--violet)); box-shadow: 0 0 18px rgba(62,242,227,.45); font-size: 16px; }
+    .brand .mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(135deg, var(--cyan), var(--violet)); box-shadow: 0 0 18px rgba(62,242,227,.45); position: relative; overflow: hidden; animation: markGlow 2.8s ease-in-out infinite; }
+    .brand .mark .logo { width: 21px; height: 21px; display: block; }
+    .lg-shield { stroke-dasharray: 100; stroke-dashoffset: 0; animation: lgDraw 4s ease-in-out infinite; }
+    .lg-scan { animation: lgScan 2.8s cubic-bezier(.4,0,.2,1) infinite; filter: drop-shadow(0 0 3px rgba(255,255,255,.9)); }
+    .lg-check { stroke-dasharray: 100; stroke-dashoffset: 100; animation: lgCheck 4s ease-in-out infinite; }
+    @keyframes lgDraw { 0% { stroke-dashoffset: 100; opacity: .45; } 40%, 100% { stroke-dashoffset: 0; opacity: 1; } }
+    @keyframes lgScan { 0% { transform: translateY(1px); opacity: 0; } 12% { opacity: 1; } 55% { transform: translateY(25px); opacity: 1; } 70% { opacity: 0; } 100% { transform: translateY(1px); opacity: 0; } }
+    @keyframes lgCheck { 0%, 45% { stroke-dashoffset: 100; } 62%, 100% { stroke-dashoffset: 0; } }
+    @keyframes markGlow { 0%, 100% { box-shadow: 0 0 14px rgba(62,242,227,.4); } 50% { box-shadow: 0 0 24px rgba(62,242,227,.75); } }
+    @media (prefers-reduced-motion: reduce) { .lg-shield, .lg-scan, .lg-check, .brand .mark { animation: none !important; } .lg-check { stroke-dashoffset: 0; } .lg-scan { opacity: 0; } }
     .brand b { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .92rem; transition: color .2s; }
@@ -166,7 +175,7 @@
 
   <nav>
     <div class="wrap">
-      <div class="brand"><span class="mark">🛡️</span> Agent<b>Sec</b></div>
+      <div class="brand"><span class="mark"><svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><clipPath id="logoClip"><path d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z"/></clipPath></defs><path class="lg-shield" pathLength="100" d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><g clip-path="url(#logoClip)"><rect class="lg-scan" x="4" y="0" width="24" height="2.6" fill="#fff"/></g><path class="lg-check" pathLength="100" d="M11.5 16 14.7 19.3 20.5 13" stroke="#04221a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Agent<b>Sec</b></div>
       <div class="nav-links">
         <a href="#features">Plateforme</a>
         <a href="#flow">Fonctionnement</a>
@@ -288,7 +297,7 @@
 
   <footer>
     <div class="wrap">
-      <div class="brand"><span class="mark">🛡️</span> Agent<b>Sec</b></div>
+      <div class="brand"><span class="mark"><svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><clipPath id="logoClip"><path d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z"/></clipPath></defs><path class="lg-shield" pathLength="100" d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><g clip-path="url(#logoClip)"><rect class="lg-scan" x="4" y="0" width="24" height="2.6" fill="#fff"/></g><path class="lg-check" pathLength="100" d="M11.5 16 14.7 19.3 20.5 13" stroke="#04221a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Agent<b>Sec</b></div>
       <p>Analyse de malware pour agents IA · <a href="mailto:contact@agentsec.ca">contact@agentsec.ca</a></p>
       <p class="meta">© 2026 · agentsec.ca · built for autonomous agents</p>
     </div>
