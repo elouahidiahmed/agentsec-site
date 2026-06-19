@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentSec — Analyse de malware pour agents IA</title>
+  <meta name="description" content="AgentSec : le « VirusTotal » conçu pour les agents IA. Un agent soumet un fichier, paie à l'analyse via x402 / HTTP 402, et reçoit un verdict structuré. Cœur d'analyse : Assemblyline 4." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AgentSec — Analyse de malware pour agents IA" />
+  <meta property="og:description" content="Le « VirusTotal » destiné aux agents IA. Paiement à l'analyse via x402, verdict structuré, cœur Assemblyline 4." />
+  <meta property="og:url" content="https://agentsec.ca" />
+
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🛡️&lt;/text&gt;&lt;/svg&gt;" />
+
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --bg-soft: #111722;
+      --card: #151c2a;
+      --border: #1f2a3d;
+      --text: #e6edf6;
+      --muted: #8b9bb4;
+      --accent: #3ddc97;
+      --accent-dim: #1e8c63;
+      --code-bg: #0d131d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .glow {
+      position: fixed;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(61,220,151,0.12) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    header { padding: 28px 0; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .brand .dot { color: var(--accent); }
+    .badge {
+      font-size: 0.72rem; color: var(--accent); border: 1px solid var(--accent-dim);
+      background: rgba(61,220,151,0.08); padding: 4px 10px; border-radius: 999px; font-weight: 600;
+    }
+
+    .hero { padding: 70px 0 54px; text-align: center; }
+    .hero h1 {
+      font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.08; letter-spacing: -0.03em;
+      font-weight: 800; margin-bottom: 20px;
+    }
+    .hero h1 .hl { color: var(--accent); }
+    .hero p.lead { font-size: clamp(1.05rem, 2.5vw, 1.25rem); color: var(--muted); max-width: 620px; margin: 0 auto 32px; }
+
+    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 24px; border-radius: 10px; font-weight: 600;
+      text-decoration: none; font-size: 0.98rem; transition: transform .15s ease, background .15s ease;
+    }
+    .btn-primary { background: var(--accent); color: #06241a; }
+    .btn-primary:hover { transform: translateY(-2px); background: #4fe9a6; }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; padding: 30px 0 10px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .card:hover { border-color: var(--accent-dim); transform: translateY(-3px); }
+    .card .ico { font-size: 1.6rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .card p { color: var(--muted); font-size: 0.92rem; }
+
+    .demo { padding: 48px 0 20px; }
+    .demo h2 { text-align: center; font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 22px; }
+    pre {
+      background: var(--code-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 22px; overflow-x: auto; font-size: 0.86rem; line-height: 1.7;
+      font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    }
+    pre .c { color: var(--muted); }
+    pre .g { color: var(--accent); }
+
+    footer { padding: 56px 0 40px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 50px; }
+    footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--border); }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+
+    <header>
+      <div class="brand">🛡️ Agent<span class="dot">Sec</span></div>
+      <span class="badge">Phase 1 · x402 + orchestration async</span>
+    </header>
+
+    <section class="hero">
+      <h1>Analyse de malware<br /><span class="hl">conçue pour les agents IA</span></h1>
+      <p class="lead">
+        Un agent soumet un fichier, paie à l'analyse via <strong>x402 / HTTP&nbsp;402</strong>,
+        et reçoit un verdict structuré&nbsp;: le « VirusTotal » des agents. Cœur d'analyse&nbsp;:
+        <strong>Assemblyline&nbsp;4</strong>.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#demo">Voir l'API</a>
+        <a class="btn btn-ghost" href="mailto:contact@agentsec.ca">Nous contacter</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="ico">🤖</div>
+        <h3>Pensé pour les agents</h3>
+        <p>Livraison MCP + REST. Un agent négocie le paiement et récupère un verdict machine-readable, sans humain dans la boucle.</p>
+      </div>
+      <div class="card">
+        <div class="ico">💸</div>
+        <h3>Paiement x402</h3>
+        <p>Défi HTTP 402 conforme, règlement USDC via facilitateur, anti-rejeu, screening de sanctions, crédit si l'analyse échoue.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧬</div>
+        <h3>Verdict structuré</h3>
+        <p>Contrat versionné <code>report.v1</code> + STIX. Adressage par <code>sha256</code>&nbsp;: dédup, idempotence et cache de coût.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>Observable</h3>
+        <p>Orchestration 2-tiers (statique synchrone, deep asynchrone), métriques Prometheus et dashboard Grafana de pilotage.</p>
+      </div>
+    </section>
+
+    <section class="demo" id="demo">
+      <h2>Soumettre un fichier en une requête</h2>
+      <pre><span class="c"># Tier STATIC — synchrone, renvoie un rapport immédiat</span>
+curl -F <span class="g">"file=@sample.bin"</span> -F <span class="g">"tier=STATIC"</span> \
+     https://agentsec.ca/v1/analyses
+
+<span class="c"># Verdict en cache (le chemin le moins cher)</span>
+curl https://agentsec.ca/v1/files/<span class="g">&lt;sha256&gt;</span>/verdict</pre>
+    </section>
+
+    <footer>
+      <p>AgentSec — analyse de malware pour agents IA · <a href="mailto:contact@agentsec.ca">contact@agentsec.ca</a></p>
+      <p style="margin-top:8px;opacity:.7">© 2026 · agentsec.ca</p>
+    </footer>
+
+  </div>
+</body>
+</html>
