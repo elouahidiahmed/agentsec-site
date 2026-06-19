@@ -80,7 +80,6 @@
     @keyframes lgScan { 0% { transform: translateY(1px); opacity: 0; } 12% { opacity: 1; } 55% { transform: translateY(25px); opacity: 1; } 70% { opacity: 0; } 100% { transform: translateY(1px); opacity: 0; } }
     @keyframes lgCheck { 0%, 45% { stroke-dashoffset: 100; } 62%, 100% { stroke-dashoffset: 0; } }
     @keyframes markGlow { 0%, 100% { box-shadow: 0 0 14px rgba(62,242,227,.4); } 50% { box-shadow: 0 0 24px rgba(62,242,227,.75); } }
-    @media (prefers-reduced-motion: reduce) { .lg-shield, .lg-scan, .lg-check, .brand .mark { animation: none !important; } .lg-check { stroke-dashoffset: 0; } .lg-scan { opacity: 0; } }
     .brand b { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .92rem; transition: color .2s; }
