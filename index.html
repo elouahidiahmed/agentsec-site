@@ -80,6 +80,24 @@
     @keyframes lgScan { 0% { transform: translateY(1px); opacity: 0; } 12% { opacity: 1; } 55% { transform: translateY(25px); opacity: 1; } 70% { opacity: 0; } 100% { transform: translateY(1px); opacity: 0; } }
     @keyframes lgCheck { 0%, 45% { stroke-dashoffset: 100; } 62%, 100% { stroke-dashoffset: 0; } }
     @keyframes markGlow { 0%, 100% { box-shadow: 0 0 14px rgba(62,242,227,.4); } 50% { box-shadow: 0 0 24px rgba(62,242,227,.75); } }
+
+    /* ---------- Motion toggle ---------- */
+    .motion-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--glass); color: var(--muted); font-family: inherit; font-size: .82rem; cursor: pointer; transition: color .2s, border-color .2s; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .motion-toggle:hover { color: var(--text); border-color: var(--cyan); }
+    .motion-toggle .mt-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 9px var(--green); transition: background .2s, box-shadow .2s; }
+    .motion-toggle.is-off { color: var(--faint); }
+    .motion-toggle.is-off .mt-dot { background: var(--faint); box-shadow: none; }
+
+    /* ---------- Reduced-motion mode (auto via OS pref, or manual toggle) ---------- */
+    .reduce-motion * { transition-duration: .001s !important; transition-delay: 0s !important; }
+    .reduce-motion .orb { animation: none !important; }
+    .reduce-motion .hero h1 .grad { animation: none !important; background-position: 0 0; }
+    .reduce-motion .pill .dot { animation: none !important; }
+    .reduce-motion .cursor { animation: none !important; opacity: 1; }
+    .reduce-motion .mark { animation: none !important; }
+    .reduce-motion .lg-shield, .reduce-motion .lg-check { animation: none !important; stroke-dashoffset: 0 !important; }
+    .reduce-motion .lg-scan { animation: none !important; opacity: 0 !important; }
+    .reduce-motion .reveal { opacity: 1 !important; transform: none !important; }
     .brand b { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .92rem; transition: color .2s; }
@@ -163,6 +181,18 @@
     footer a:hover { text-decoration: underline; }
     footer .meta { opacity: .55; margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: .78rem; }
   </style>
+
+  <script>
+    // Apply motion preference BEFORE paint (no flash). Stored choice wins; else follow OS pref.
+    (function () {
+      try {
+        var stored = localStorage.getItem('agentsec-motion');
+        var reduced = stored ? stored === 'reduced'
+          : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) document.documentElement.classList.add('reduce-motion');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <div class="bg-layer">
@@ -179,6 +209,9 @@
         <a href="#features">Plateforme</a>
         <a href="#flow">Fonctionnement</a>
         <a href="#api">API</a>
+        <button id="motionToggle" class="motion-toggle" type="button" aria-pressed="true" title="Activer ou réduire les animations">
+          <span class="mt-dot"></span><span class="mt-label">Animations</span>
+        </button>
         <a class="nav-cta" href="mailto:contact@agentsec.ca">Contact</a>
       </div>
     </div>
@@ -311,6 +344,33 @@
       el.style.transitionDelay = (Math.min(i, 6) * 60) + 'ms';
       io.observe(el);
     });
+
+    // Motion toggle
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('motionToggle');
+      if (!btn) return;
+      const label = btn.querySelector('.mt-label');
+      function render(reduced) {
+        btn.classList.toggle('is-off', reduced);
+        btn.setAttribute('aria-pressed', String(!reduced));
+        label.textContent = reduced ? 'Animations off' : 'Animations';
+        btn.title = reduced ? 'Activer les animations' : 'Réduire les animations';
+      }
+      render(root.classList.contains('reduce-motion'));
+      btn.addEventListener('click', () => {
+        const reduced = !root.classList.contains('reduce-motion');
+        root.classList.toggle('reduce-motion', reduced);
+        try { localStorage.setItem('agentsec-motion', reduced ? 'reduced' : 'full'); } catch (e) {}
+        render(reduced);
+      });
+      // If the visitor never chose, keep following live OS-pref changes.
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))((e) => {
+        let stored; try { stored = localStorage.getItem('agentsec-motion'); } catch (_) {}
+        if (!stored) { root.classList.toggle('reduce-motion', e.matches); render(e.matches); }
+      });
+    })();
   </script>
 </body>
 </html>
