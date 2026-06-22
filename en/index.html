@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentSec — Analyse de malware pour agents IA</title>
-  <meta name="description" content="AgentSec : le « VirusTotal » conçu pour les agents IA. Un agent soumet un fichier, paie à l'analyse via x402 / HTTP 402, et reçoit un verdict structuré. Cœur d'analyse : Assemblyline 4." />
+  <title>AgentSec — Malware analysis for AI agents</title>
+  <meta name="description" content="AgentSec: the “VirusTotal” built for AI agents. An agent submits a file, pays per analysis via x402 / HTTP 402, and gets a structured verdict. Analysis core: Assemblyline 4." />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AgentSec — Analyse de malware pour agents IA" />
-  <meta property="og:description" content="Le « VirusTotal » destiné aux agents IA. Paiement à l'analyse via x402, verdict structuré, cœur Assemblyline 4." />
-  <meta property="og:url" content="https://agentsec.ca" />
+  <meta property="og:title" content="AgentSec — Malware analysis for AI agents" />
+  <meta property="og:description" content="The “VirusTotal” for AI agents. Pay-per-analysis via x402, structured verdict, Assemblyline 4 core." />
+  <meta property="og:url" content="https://agentsec.ca/en" />
 
   <link rel="alternate" hreflang="fr" href="https://agentsec.ca/" />
   <link rel="alternate" hreflang="en" href="https://agentsec.ca/en/" />
@@ -211,35 +211,35 @@
     <div class="wrap">
       <div class="brand"><span class="mark"><svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><clipPath id="logoClip"><path d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z"/></clipPath></defs><path class="lg-shield" pathLength="100" d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><g clip-path="url(#logoClip)"><rect class="lg-scan" x="4" y="0" width="24" height="2.6" fill="#fff"/></g><path class="lg-check" pathLength="100" d="M11.5 16 14.7 19.3 20.5 13" stroke="#04221a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Agent<b>Sec</b></div>
       <div class="nav-links">
-        <a href="#features">Plateforme</a>
-        <a href="#flow">Fonctionnement</a>
+        <a href="#features">Platform</a>
+        <a href="#flow">How it works</a>
         <a href="#api">API</a>
-        <button id="motionToggle" class="motion-toggle" type="button" aria-pressed="true" title="Activer ou réduire les animations">
+        <button id="motionToggle" class="motion-toggle" type="button" aria-pressed="true" title="Turn animations on or off">
           <span class="mt-dot"></span><span class="mt-label">Animations</span>
         </button>
-        <a class="lang-link" href="/en/" hreflang="en" title="English version">EN</a>
+        <a class="lang-link" href="/" hreflang="fr" title="Version française">FR</a>
         <a class="nav-cta" href="mailto:contact@agentsec.ca">Contact</a>
       </div>
     </div>
   </nav>
 
   <header class="hero wrap">
-    <div class="pill"><span class="dot"></span> Phase 1 · x402 · orchestration async</div>
-    <h1>Analyse de malware<br /><span class="grad">native pour les agents IA</span></h1>
+    <div class="pill"><span class="dot"></span> Phase 1 · x402 · async orchestration</div>
+    <h1>Malware analysis<br /><span class="grad">native to AI agents</span></h1>
     <p class="lead">
-      Un agent soumet un fichier, paie à l'analyse via <strong>x402 / HTTP&nbsp;402</strong>
-      et reçoit un verdict structuré, sans humain dans la boucle. Le « VirusTotal » des agents —
-      cœur d'analyse <strong>Assemblyline&nbsp;4</strong>.
+      An agent submits a file, pays per analysis via <strong>x402 / HTTP&nbsp;402</strong>
+      and gets a structured verdict — no human in the loop. The “VirusTotal” for agents,
+      powered by <strong>Assemblyline&nbsp;4</strong>.
     </p>
     <div class="cta">
-      <a class="btn btn-primary" href="#api">▶ Voir l'API</a>
-      <a class="btn btn-ghost" href="mailto:contact@agentsec.ca">Nous contacter</a>
+      <a class="btn btn-primary" href="#api">▶ View the API</a>
+      <a class="btn btn-ghost" href="mailto:contact@agentsec.ca">Contact us</a>
     </div>
 
     <div class="terminal reveal">
-      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>agent@swarm — analyse</span></div>
+      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>agent@swarm — analysis</span></div>
       <div class="term-body">
-<span class="c"># L'agent soumet un échantillon (tier STATIC = synchrone)</span><br />
+<span class="c"># The agent submits a sample (STATIC tier = synchronous)</span><br />
 <span class="p">$</span> curl -F <span class="s">"file=@sample.bin"</span> -F <span class="s">"tier=STATIC"</span> \<br />
 &nbsp;&nbsp;&nbsp;&nbsp;https://agentsec.ca/v1/analyses<br />
 <br />
@@ -252,72 +252,72 @@
   <main class="wrap">
 
     <section class="block" id="features">
-      <div class="eyebrow reveal">// La plateforme</div>
-      <h2 class="reveal">Conçue pour des machines, pas des humains</h2>
-      <p class="sub reveal">Paiement programmatique, sortie structurée, et une architecture ports &amp; adapters pour évoluer sans refonte.</p>
+      <div class="eyebrow reveal">// The platform</div>
+      <h2 class="reveal">Built for machines, not humans</h2>
+      <p class="sub reveal">Programmatic payment, structured output, and a ports &amp; adapters architecture that scales without rewrites.</p>
       <div class="grid-cards">
         <div class="card reveal">
           <div class="ico">🤖</div>
           <h3>Agent-native</h3>
-          <p>Livraison <strong>MCP + REST</strong>. L'agent négocie le paiement et récupère un verdict machine-readable, de bout en bout.</p>
+          <p><strong>MCP + REST</strong> delivery. The agent negotiates payment and retrieves a machine-readable verdict, end to end.</p>
         </div>
         <div class="card reveal">
           <div class="ico">💸</div>
-          <h3>Paiement x402</h3>
-          <p>Défi HTTP 402 conforme, règlement USDC via facilitateur, anti-rejeu, screening de sanctions et crédit si l'analyse échoue.</p>
+          <h3>x402 payments</h3>
+          <p>Compliant HTTP 402 challenge, USDC settlement via facilitator, replay protection, sanctions screening, and a credit if analysis fails.</p>
         </div>
         <div class="card reveal">
           <div class="ico">🧬</div>
-          <h3>Verdict structuré</h3>
-          <p>Contrat versionné <code>report.v1</code> + STIX. Adressage par <code>sha256</code> : dédup, idempotence, cache de coût.</p>
+          <h3>Structured verdict</h3>
+          <p>Versioned <code>report.v1</code> + STIX contract. Content-addressed by <code>sha256</code>: dedup, idempotency, cost cache.</p>
         </div>
         <div class="card reveal">
           <div class="ico">📊</div>
           <h3>Observable</h3>
-          <p>Orchestration 2-tiers, métriques <strong>Prometheus</strong> et tableau de bord <strong>Grafana</strong> de pilotage temps réel.</p>
+          <p>2-tier orchestration, <strong>Prometheus</strong> metrics and a real-time <strong>Grafana</strong> cockpit dashboard.</p>
         </div>
       </div>
     </section>
 
     <section class="block" id="flow">
-      <div class="eyebrow reveal">// Fonctionnement</div>
-      <h2 class="reveal">Trois appels, zéro friction</h2>
-      <p class="sub reveal">Du fichier au verdict, le protocole est pensé pour être piloté par un agent autonome.</p>
+      <div class="eyebrow reveal">// How it works</div>
+      <h2 class="reveal">Three calls, zero friction</h2>
+      <p class="sub reveal">From file to verdict, the protocol is designed to be driven by an autonomous agent.</p>
       <div class="flow">
         <div class="step reveal">
           <div class="num">01</div>
-          <h4>Soumettre</h4>
-          <p>L'agent POST le fichier sur <code>/v1/analyses</code>. Réponse <strong>402</strong> avec les conditions de paiement.</p>
+          <h4>Submit</h4>
+          <p>The agent POSTs the file to <code>/v1/analyses</code>. Response <strong>402</strong> with the payment terms.</p>
         </div>
         <div class="step reveal">
           <div class="num">02</div>
-          <h4>Payer</h4>
-          <p>L'agent signe une autorisation USDC et rejoue avec l'en-tête <code>X-PAYMENT</code>. Réglé via facilitateur.</p>
+          <h4>Pay</h4>
+          <p>The agent signs a USDC authorization and replays with the <code>X-PAYMENT</code> header. Settled via facilitator.</p>
         </div>
         <div class="step reveal">
           <div class="num">03</div>
-          <h4>Récupérer</h4>
-          <p>STATIC → verdict immédiat. DEEP → <strong>202</strong> + polling/webhook une fois la détonation terminée.</p>
+          <h4>Retrieve</h4>
+          <p>STATIC → instant verdict. DEEP → <strong>202</strong> + polling/webhook once detonation completes.</p>
         </div>
       </div>
     </section>
 
     <section class="block" id="api">
       <div class="eyebrow reveal">// API</div>
-      <h2 class="reveal">Soumettre un fichier en une requête</h2>
-      <p class="sub reveal">REST simple, idempotent par hash. Le verdict en cache est le chemin le moins cher.</p>
+      <h2 class="reveal">Submit a file in one request</h2>
+      <p class="sub reveal">Simple REST, idempotent by hash. The cached verdict is the cheapest path.</p>
       <div class="terminal reveal">
         <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>~/agentsec</span></div>
         <div class="term-body">
-<span class="c"># Tier STATIC — synchrone, rapport immédiat</span><br />
+<span class="c"># STATIC tier — synchronous, instant report</span><br />
 <span class="p">$</span> curl -F <span class="s">"file=@sample.bin"</span> -F <span class="s">"tier=STATIC"</span> \<br />
 &nbsp;&nbsp;&nbsp;&nbsp;https://agentsec.ca/v1/analyses<br />
 <br />
-<span class="c"># Tier DEEP — asynchrone, détonation puis polling</span><br />
+<span class="c"># DEEP tier — asynchronous, detonation then polling</span><br />
 <span class="p">$</span> curl -F <span class="s">"file=@sample.bin"</span> -F <span class="s">"tier=DEEP"</span> \<br />
 &nbsp;&nbsp;&nbsp;&nbsp;https://agentsec.ca/v1/analyses<br />
 <br />
-<span class="c"># Verdict en cache — le chemin le moins cher</span><br />
+<span class="c"># Cached verdict — the cheapest path</span><br />
 <span class="p">$</span> curl https://agentsec.ca/v1/files/<span class="k">&lt;sha256&gt;</span>/verdict<span class="cursor"></span>
         </div>
       </div>
@@ -325,9 +325,9 @@
 
     <section class="block">
       <div class="banner reveal">
-        <h2>Sécurisez votre swarm d'agents</h2>
-        <p>AgentSec est en construction active. Parlez-nous de votre cas d'usage.</p>
-        <a class="btn btn-primary" href="mailto:contact@agentsec.ca">✦ Demander un accès</a>
+        <h2>Secure your agent swarm</h2>
+        <p>AgentSec is under active development. Tell us about your use case.</p>
+        <a class="btn btn-primary" href="mailto:contact@agentsec.ca">✦ Request access</a>
       </div>
     </section>
 
@@ -336,8 +336,8 @@
   <footer>
     <div class="wrap">
       <div class="brand"><span class="mark"><svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><clipPath id="logoClip"><path d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z"/></clipPath></defs><path class="lg-shield" pathLength="100" d="M16 4 26 7.6V15.6C26 22.4 21.6 26.4 16 28.6 10.4 26.4 6 22.4 6 15.6V7.6Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><g clip-path="url(#logoClip)"><rect class="lg-scan" x="4" y="0" width="24" height="2.6" fill="#fff"/></g><path class="lg-check" pathLength="100" d="M11.5 16 14.7 19.3 20.5 13" stroke="#04221a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Agent<b>Sec</b></div>
-      <p>Analyse de malware pour agents IA · <a href="mailto:contact@agentsec.ca">contact@agentsec.ca</a></p>
-      <p class="foot-links" style="margin:12px 0 4px"><a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a> · <a href="/support.html">Support</a> · <a href="/delete-data.html">Suppression des données</a></p>
+      <p>Malware analysis for AI agents · <a href="mailto:contact@agentsec.ca">contact@agentsec.ca</a></p>
+      <p class="foot-links" style="margin:12px 0 4px"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/support.html">Support</a> · <a href="/delete-data.html">Data deletion</a></p>
       <p class="meta">© 2026 · agentsec.ca · built for autonomous agents</p>
     </div>
   </footer>
@@ -362,7 +362,7 @@
         btn.classList.toggle('is-off', reduced);
         btn.setAttribute('aria-pressed', String(!reduced));
         label.textContent = reduced ? 'Animations off' : 'Animations';
-        btn.title = reduced ? 'Activer les animations' : 'Réduire les animations';
+        btn.title = reduced ? 'Turn animations on' : 'Reduce animations';
       }
       render(root.classList.contains('reduce-motion'));
       btn.addEventListener('click', () => {
